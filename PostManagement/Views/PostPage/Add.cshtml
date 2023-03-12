@@ -1,0 +1,62 @@
+﻿@using PostManagement.Models
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<div>
+    <form method="post" action="/Post/add">
+        <input type="hidden" name="p.PostId" value="@Model.PostId"></input>
+        <select name="p.AppUserId">
+            @{
+                foreach (var user in ViewBag.listUser)
+                {
+                    bool checkSelect = Model.AppUserId == user.Id;
+                    if (checkSelect)
+                    {
+                        <option value="@user.Id" selected>@user.FullName</option>
+                    }
+                    else
+                    {
+                        <option value="@user.Id">@user.FullName</option>
+                    }
+                }
+            }
+        </select>
+        Create date:
+        <input name="p.CreatedDate" type="datetime" value="@Model.CreatedDate"
+        disabled
+        ></input>
+        Updated date:
+        <input name="p.UpdatedDate" type="datetime" value="@(DateTime.Now)"
+        disabled></input>
+        Title: <input name="p.Title" type="text" value="@Model.Title" />
+        Content: <textarea name="p.Content" rows="4" cols="50">
+            @Model.Content
+        </textarea>
+
+        Published ? 
+        <input type="radio" name="p.PublishStatus"
+               value="0" @(Model.PublishStatus == 1 ? "checked" : "") /> OK
+        <input type="radio" name="p.PublishStatus"
+               value="1" @(Model.PublishStatus == 0 ? "checked" : "") /> Not Ok
+
+Category:
+        <select name="p.PostCategoryId">
+            @{
+                foreach (var cat in ViewBag.listCat)
+                {
+                    bool checkSelect = Model.PostCategoryId == cat.Id;
+                    if (checkSelect)
+                    {
+                        <option value="@cat.Id" selected>@cat.CategoryName</option>
+                    }
+                    else
+                    {
+                        <option value="@cat.Id">@cat.CategoryName</option>
+                    }
+                }
+            }
+        </select>
+        <button type="submit">Confirm</button>
+    </form>
+</div>

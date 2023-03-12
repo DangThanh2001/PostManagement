@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PostManagement.DataAccess;
 
@@ -11,9 +12,10 @@ using PostManagement.DataAccess;
 namespace PostManagement.Migrations
 {
     [DbContext(typeof(PostManagementDB))]
-    partial class PostManagementDBModelSnapshot : ModelSnapshot
+    [Migration("20230312094152_initDB")]
+    partial class initDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,12 +26,11 @@ namespace PostManagement.Migrations
 
             modelBuilder.Entity("PostManagement.Models.AppUser", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("UserId");
+                        .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"), 1L, 1);
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -51,7 +52,7 @@ namespace PostManagement.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
-                    b.HasKey("Id");
+                    b.HasKey("UserId");
 
                     b.ToTable("AppUsers", (string)null);
                 });
@@ -64,10 +65,6 @@ namespace PostManagement.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PostId"), 1L, 1);
 
-                    b.Property<int>("AppUserId")
-                        .HasColumnType("int")
-                        .HasColumnName("AuthorId");
-
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasMaxLength(250)
@@ -76,11 +73,7 @@ namespace PostManagement.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 3, 12, 17, 17, 47, 889, DateTimeKind.Local).AddTicks(1179));
-
-                    b.Property<int>("PostCategoryId")
-                        .HasColumnType("int")
-                        .HasColumnName("CategoryId");
+                        .HasDefaultValue(new DateTime(2023, 3, 12, 16, 41, 51, 902, DateTimeKind.Local).AddTicks(154));
 
                     b.Property<int>("PublishStatus")
                         .HasMaxLength(250)
@@ -94,25 +87,30 @@ namespace PostManagement.Migrations
                     b.Property<DateTime>("UpdatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 3, 12, 17, 17, 47, 889, DateTimeKind.Local).AddTicks(1590));
+                        .HasDefaultValue(new DateTime(2023, 3, 12, 16, 41, 51, 902, DateTimeKind.Local).AddTicks(455));
+
+                    b.Property<int>("appUserUserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("postCategoryCategoryId")
+                        .HasColumnType("int");
 
                     b.HasKey("PostId");
 
-                    b.HasIndex("AppUserId");
+                    b.HasIndex("appUserUserId");
 
-                    b.HasIndex("PostCategoryId");
+                    b.HasIndex("postCategoryCategoryId");
 
                     b.ToTable("Posts", (string)null);
                 });
 
             modelBuilder.Entity("PostManagement.Models.PostCategory", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CategoryId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("CategoryId");
+                        .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"), 1L, 1);
 
                     b.Property<string>("CategoryDescription")
                         .IsRequired()
@@ -124,7 +122,7 @@ namespace PostManagement.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
-                    b.HasKey("Id");
+                    b.HasKey("CategoryId");
 
                     b.ToTable("PostCategories", (string)null);
                 });
@@ -133,13 +131,13 @@ namespace PostManagement.Migrations
                 {
                     b.HasOne("PostManagement.Models.AppUser", "appUser")
                         .WithMany()
-                        .HasForeignKey("AppUserId")
+                        .HasForeignKey("appUserUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("PostManagement.Models.PostCategory", "postCategory")
                         .WithMany()
-                        .HasForeignKey("PostCategoryId")
+                        .HasForeignKey("postCategoryCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

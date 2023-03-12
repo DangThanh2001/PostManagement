@@ -1,8 +1,11 @@
-﻿namespace PostManagement.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace PostManagement.Models
 {
     public class PostCategory
     {
-        public int CategoryId { get; set; }
+        [Column("CategoryId")]
+        public int Id { get; set; }
         public string CategoryName { get; set; }
         public string CategoryDescription { get; set; }
     }

@@ -23,7 +23,7 @@ namespace PostManagement.Configurations
         public void Configure(EntityTypeBuilder<AppUser> builder)
         {
             builder.ToTable("AppUsers");
-            builder.HasKey(x => x.UserId);
+            builder.HasKey(x => x.Id);
             builder.Property(x => x.FullName).IsRequired().HasMaxLength(250);
             builder.Property(x => x.Address).IsRequired().HasMaxLength(250);
             builder.Property(x => x.Email).IsRequired().HasMaxLength(250);
@@ -36,7 +36,7 @@ namespace PostManagement.Configurations
         public void Configure(EntityTypeBuilder<PostCategory> builder)
         {
             builder.ToTable("PostCategories");
-            builder.HasKey(x => x.CategoryId);
+            builder.HasKey(x => x.Id);
             builder.Property(x => x.CategoryName).IsRequired().HasMaxLength(250);
             builder.Property(x => x.CategoryDescription).IsRequired().HasMaxLength(250);
         }

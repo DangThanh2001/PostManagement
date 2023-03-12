@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PostManagement.DataAccess;
 
@@ -11,9 +12,10 @@ using PostManagement.DataAccess;
 namespace PostManagement.Migrations
 {
     [DbContext(typeof(PostManagementDB))]
-    partial class PostManagementDBModelSnapshot : ModelSnapshot
+    [Migration("20230312100816_changePost")]
+    partial class changePost
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,8 +28,7 @@ namespace PostManagement.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("UserId");
+                        .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
@@ -76,7 +77,7 @@ namespace PostManagement.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 3, 12, 17, 17, 47, 889, DateTimeKind.Local).AddTicks(1179));
+                        .HasDefaultValue(new DateTime(2023, 3, 12, 17, 8, 16, 166, DateTimeKind.Local).AddTicks(1211));
 
                     b.Property<int>("PostCategoryId")
                         .HasColumnType("int")
@@ -94,7 +95,7 @@ namespace PostManagement.Migrations
                     b.Property<DateTime>("UpdatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 3, 12, 17, 17, 47, 889, DateTimeKind.Local).AddTicks(1590));
+                        .HasDefaultValue(new DateTime(2023, 3, 12, 17, 8, 16, 166, DateTimeKind.Local).AddTicks(1527));
 
                     b.HasKey("PostId");
 
@@ -109,8 +110,7 @@ namespace PostManagement.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("CategoryId");
+                        .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 

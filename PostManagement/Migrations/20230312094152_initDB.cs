@@ -46,8 +46,8 @@ namespace PostManagement.Migrations
                     PostId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     appUserUserId = table.Column<int>(type: "int", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 3, 10, 16, 43, 48, 56, DateTimeKind.Local).AddTicks(2181)),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 3, 10, 16, 43, 48, 56, DateTimeKind.Local).AddTicks(2710)),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 3, 12, 16, 41, 51, 902, DateTimeKind.Local).AddTicks(154)),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 3, 12, 16, 41, 51, 902, DateTimeKind.Local).AddTicks(455)),
                     Title = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
                     Content = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
                     PublishStatus = table.Column<int>(type: "int", maxLength: 250, nullable: false),

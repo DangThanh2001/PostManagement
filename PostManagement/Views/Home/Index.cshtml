@@ -1,8 +1,40 @@
-﻿@{
+﻿@using PostManagement.Models
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+<div class="">
+    <h1 class="text-center display-4">Welcome</h1>
+    <div>
+        <form method="get">
+            <input class="" type="text" name="search" value="@ViewBag.Search" />
+            <button type="submit" class="btn btn-success">search</button>
+        </form>
+    </div>
+    <div class="d-flex flex-row mb-3">
+        <div class="p-2">
+            <a href="/Home/add">Create post</a>
+        </div>
+    </div>
+  
+    <div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>User created</th>
+                    <th>title</th>
+                    <th>Content</th>
+                    <th>Created date</th>
+                    <th>Updated date</th>
+                    <th>Published status</th>
+                    <th>category</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="tablePost">
+            </tbody>
+        </table>
+    </div>
+
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
