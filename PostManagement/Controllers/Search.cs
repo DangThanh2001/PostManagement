@@ -3,6 +3,7 @@
     public class Search
     {
         public string StringSearch { get; set; }
+        public int page { get; set; }
 
         private static Search ins { get; set; }
 

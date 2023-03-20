@@ -16,7 +16,7 @@
             <a href="/Home/add">Create post</a>
         </div>
     </div>
-  
+
     <div>
         <table class="table table-bordered">
             <thead>
@@ -34,6 +34,25 @@
             <tbody id="tablePost">
             </tbody>
         </table>
+        <div class="">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-end">
+                    <li class="page-item
+@(ViewBag.Page == 0 || ViewBag.Page == 1 ? "disabled" : "")
+"><a class="page-link" href="/Home/Index?page=@(ViewBag.Page-1)">Previous</a></li>
+                    @for (int i = 1; i <= ViewBag.totalPage; i++)
+                    {
+                        <li class="page-item @(ViewBag.Page == i ? "active" : "")">
+                            <a class="page-link" href="/Home/Index?page=@i">@i</a>
+                        </li>
+                    }
+                    <li class="page-item @(ViewBag.Page == ViewBag.totalPage
+                     ? "disabled" : "")">
+                        <a class="page-link" href="/Home/Index?page=@(ViewBag.Page+1)">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </div>
 
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>

@@ -11,6 +11,7 @@ namespace PostManagement.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly int itemOnePage = 4;
         private readonly ILogger<HomeController> _logger;
         private readonly PostManagementDB context;
         private readonly IHubContext<SignalrServer> signalRHub;
@@ -41,10 +42,15 @@ namespace PostManagement.Controllers
                     )
                .ToList();
             }
+            var p = Search.Instance().page;
+            p = p == 0 ? 0 : p - 1;
+            res = res.Skip(p * itemOnePage)
+               .Take(itemOnePage)
+               .ToList();
             return Ok(res);
         }
 
-        public async Task<IActionResult> Index(string search)
+        public async Task<IActionResult> Index(string search, int page)
         {
             List<Post> listAllPost = await
                 context
@@ -59,8 +65,15 @@ namespace PostManagement.Controllers
                 ).ToList();
             }
             ViewBag.Search = search;
+            ViewBag.Page = page;
             await signalRHub.Clients.All.SendAsync("LoadProducts");
             Search.Instance().StringSearch = search;
+            Search.Instance().page = page;
+            int totalPage =
+                listAllPost.Count % itemOnePage == 0 ?
+                listAllPost.Count / itemOnePage :
+                (listAllPost.Count / itemOnePage) + 1;
+            ViewBag.totalPage = totalPage;    
             return View(listAllPost);
         }
 
