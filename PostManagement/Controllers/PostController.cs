@@ -26,21 +26,22 @@ namespace PostManagement.Controllers
         {
             if (p.PostId == 0)
             {
+                p.CreatedDate = DateTime.Now;
+                p.UpdatedDate = DateTime.Now;
                 context.Posts.Add(p);
                 await context.SaveChangesAsync();
                 await signalRHub.Clients.All.SendAsync("LoadProducts");
             }
             else
             {
+                var postOld = context.Posts.FirstOrDefault(x => x.PostId == p.PostId);
+                p.CreatedDate = postOld.CreatedDate;
+                p.UpdatedDate = DateTime.Now;
                 context.Posts.Update(p);
                 await context.SaveChangesAsync();
                 await signalRHub.Clients.All.SendAsync("LoadProducts");
             }
-            return View("/Views/Home/Index.cshtml", context
-                .Posts
-                .Include(x => x.postCategory)
-                .Include(x => x.appUser)
-                .ToList());
+            return RedirectToAction("Index", "Home");
         }
 
     }

@@ -116,7 +116,7 @@ namespace PostManagement.Controllers
             {
 
             }
-            return View(Index);
+            return RedirectToAction("Index", "Home");
         }
 
         public IActionResult Privacy()

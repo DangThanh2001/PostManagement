@@ -3,60 +3,85 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 
-<div>
+<div class="container">
     <form method="post" action="/Post/add">
         <input type="hidden" name="p.PostId" value="@Model.PostId"></input>
-        <select name="p.AppUserId">
-            @{
-                foreach (var user in ViewBag.listUser)
-                {
-                    bool checkSelect = Model.AppUserId == user.Id;
-                    if (checkSelect)
+        <div class="mb-3">
+            <label class="form-label" for="author">Author:</label>
+            <select class="form-select form-select-sm mb-3" name="p.AppUserId" id="author">
+                @{
+                    foreach (var user in ViewBag.listUser)
                     {
-                        <option value="@user.Id" selected>@user.FullName</option>
-                    }
-                    else
-                    {
-                        <option value="@user.Id">@user.FullName</option>
+                        bool checkSelect = Model.AppUserId == user.Id;
+                        if (checkSelect)
+                        {
+                            <option value="@user.Id" selected>@user.FullName</option>
+                        }
+                        else
+                        {
+                            <option value="@user.Id">@user.FullName</option>
+                        }
                     }
                 }
-            }
-        </select>
-        Create date:
-        <input name="p.CreatedDate" type="datetime" value="@Model.CreatedDate"
-        disabled
-        ></input>
-        Updated date:
-        <input name="p.UpdatedDate" type="datetime" value="@(DateTime.Now)"
-        disabled></input>
-        Title: <input name="p.Title" type="text" value="@Model.Title" />
-        Content: <textarea name="p.Content" rows="4" cols="50">
-            @Model.Content
+            </select>
+        </div>
+        
+        <div class="mb-3">
+            <label for="create" class="form-label">Create date:</label>
+            <input class="form-control" name="p.CreatedDate" type="datetime" value="@Model.CreatedDate"
+                   disabled id="create"></input>
+        </div>
+
+        <div class="mb-3">
+            <label for="update" class="form-label">Updated date:</label>
+            <input class="form-control" name="p.UpdatedDate" type="datetime" value="@(DateTime.Now)"
+                   disabled id="update"></input>
+        </div>
+
+        <div class="mb-3">
+            <label for="title" class="form-label">Title:</label>
+            <input class="form-control" name="p.Title" id="title" type="text" value="@Model.Title" />
+        </div>
+
+        <div class="mb-3">
+            <label for="content" class="form-label">Content:</label>
+            <textarea class="form-control" name="p.Content" rows="4" cols="50" id="content">
+                @Model.Content
         </textarea>
+        </div>
 
-        Published ? 
-        <input type="radio" name="p.PublishStatus"
-               value="0" @(Model.PublishStatus == 1 ? "checked" : "") /> OK
-        <input type="radio" name="p.PublishStatus"
-               value="1" @(Model.PublishStatus == 0 ? "checked" : "") /> Not Ok
+        <div class="mb-3">
+            <label class="form-label">Published ?</label>
+            <input type="radio" name="p.PublishStatus" id="pub"
+                   value="1" @(Model.PublishStatus == 1 ? "checked" : "") />
+            <label class="form-label" for="pub">OK</label>
+            <input type="radio" name="p.PublishStatus" id="nopub"
+                   value="0" @(Model.PublishStatus == 0 ? "checked" : "") />
+            <label class="form-label" for="nopub">Not OK</label>
+        </div>
 
-Category:
-        <select name="p.PostCategoryId">
-            @{
-                foreach (var cat in ViewBag.listCat)
-                {
-                    bool checkSelect = Model.PostCategoryId == cat.Id;
-                    if (checkSelect)
+        <div class="mb-5">
+            <label class="form-label" for="cat">Category:</label>
+            <select class="form-select form-select-sm mb-3" name="p.PostCategoryId" id="cat">
+                @{
+                    foreach (var cat in ViewBag.listCat)
                     {
-                        <option value="@cat.Id" selected>@cat.CategoryName</option>
-                    }
-                    else
-                    {
-                        <option value="@cat.Id">@cat.CategoryName</option>
+                        bool checkSelect = Model.PostCategoryId == cat.Id;
+                        if (checkSelect)
+                        {
+                            <option value="@cat.Id" selected>@cat.CategoryName</option>
+                        }
+                        else
+                        {
+                            <option value="@cat.Id">@cat.CategoryName</option>
+                        }
                     }
                 }
-            }
-        </select>
-        <button type="submit">Confirm</button>
+            </select>
+        </div>
+
+        <div class="mb-3 text-center">
+            <button class="btn btn-success " type="submit">Confirm</button>
+        </div>
     </form>
 </div>

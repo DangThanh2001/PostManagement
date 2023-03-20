@@ -19,15 +19,15 @@
                         `<tr> 
                         <td> ${v.appUser.fullName}</td>
                         <td> ${v.title}</td>
-                        <td> ${v.content}</td>
+                        <td> ${v.content.trim()}</td>
                         <td> ${v.createdDate}</td>
                         <td> ${v.updatedDate}</td>
                         <td> ${v.publishStatus == 1 ? `ok` : `Not ok`}</td>
                         <td> ${v.postCategory.categoryName}</td>
                         <td>
-                            <a href='/Home/update?id=${v.postId}'>Edit</a> |
-                            <a href='/Home/delete?id=${v.postId}'>Delete</a> |
                             <a href='/Home/detail?id=${v.postId}'>Details</a> |
+                            <a href='/Home/update?id=${v.postId}'>Edit</a> |
+                            <a href='/Home/delete?id=${v.postId}'>Delete</a> 
                         </td>
                     </tr>`
                 })
